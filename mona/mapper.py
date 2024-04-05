@@ -1,6 +1,7 @@
 import sqlite3
 import os
 import inspect
+from typing import Tuple, List, Any
 
 SQLITE_TYPES = {
     int: 'INTEGER',
@@ -10,12 +11,21 @@ SQLITE_TYPES = {
     bytes: 'BLOB'
 }
 CREATE_TABLE_SQL = 'CREATE TABLE {name} ({fields});'
+
 SELECT_TABLES_SQL = "SELECT name FROM sqlite_master WHERE type='table';"
-INSERT_SQL = 'INSERT INTO {name} ({fields}) VALUES ({values});'
+
+INSERT_SQL = 'INSERT INTO {name} ({fields}) VALUES ({placeholders});'
+
 SELECT_ALL_SQL = 'SELECT {fields} FROM {name};'
+
 SELECT_ONE_SQL = 'SELECT {fields} FROM {name} WHERE id = ?;'
+
 DELETE_SQL = 'DELETE FROM {name} WHERE id = ?;'
+
 UPDATE_SQL = 'UPDATE {name} SET {fields} WHERE id = ?;'
+
+SELECT_WHERE_SQL = 'SELECT {fields} FROM {name} WHERE {conditions};'
+
 class Database:
     '''
     Database class to handle all database operations. All other instances
@@ -44,26 +54,36 @@ class Database:
 
     def save(self, instance):
         '''Save a new instance of a defined object into a table'''
-        sql , values = instance._get_insert_sql()
+        sql, values = instance._get_insert_sql()
         cursor = self._execute(sql, values)
         instance._data['id'] = cursor.lastrowid
 
-    @classmethod
-    def get(cls, obj:object, id:int):
-        '''
-        Retrieves a single instance of a defined object from a table
-        '''
-        pass
+
     @classmethod
     def delete(cls, obj:object, id:int):
         '''Deletes a single instance of an object from a table defined'''
         pass
-    @classmethod
-    def all(cls, obj:object):
+
+    def all(self, table):
         '''Returns all instances of an object from a table defined'''
+        sql, fields = table._get_select_all_sql()
+        result = []
+        for row in self._execute(sql).fetchall():
+            data = dict(zip(fields, row))
+            result.append(table(**data))
+        return result
+
+    def get(self, table, id: int):
+        '''
+        Retrieves a single instance of a defined object from a table
+        '''
+        sql, fields, params = table._get_select_where_sql(id=id)
+        row = self._execute(sql, params=params).fetchone()
+        data = dict(zip(fields, row))
+        return table(**data)
+
+    def get(self, table, **kwargs):
         pass
-
-
 class Table:
     def __init__(self, **kwargs):
         self._data = {
@@ -78,7 +98,7 @@ class Table:
             return _data[key]
         return object.__getattribute__(self, key)
 
-    def _get_insert_sql(self) -> str:
+    def _get_insert_sql(self) -> tuple[str, list[Any]]:
         fields = []
         values = []
         placeholders = []
@@ -92,9 +112,10 @@ class Table:
                 values.append(getattr(self, name).id)
                 placeholders.append('?')
 
-        sql =  INSERT_SQL.format(name=self.__class__._get_name(),
-                                 fields=[], values=[])
-        return sql
+        sql = INSERT_SQL.format(name=self.__class__._get_name(),
+                                 fields=', '.join(fields),
+                                 placeholders=', '.join(placeholders))
+        return sql, values
 
     @classmethod
     def _get_name(cls):
@@ -112,6 +133,42 @@ class Table:
                 fields.append((f'{name}_id', 'INTEGER'))
         fields = [" ".join(f) for f in fields]
         return CREATE_TABLE_SQL.format(name=cls._get_name(), fields=', '.join(fields))
+
+    @classmethod
+    def _get_select_all_sql(cls):
+        fields = ['id']
+        for name, field in inspect.getmembers(cls):
+            if isinstance(field, Column):
+                fields.append(name)
+            if isinstance(field, ForeignKey):
+                fields.append(f'{name}_id')
+        fields = ', '.join(fields)
+        return SELECT_ALL_SQL.format(name=cls._get_name(), fields=fields), fields
+
+    @classmethod
+    def _get_select_where_sql_by_id(cls, id:int):
+        fields = ['id']
+        for name, field in inspect.getmembers(cls):
+            if isinstance(field, Column):
+                fields.append(name)
+            if isinstance(field, ForeignKey):
+                fields.append(f'{name}_id')
+        conditions = 'id = ?'
+        fields = ', '.join(fields)
+
+        return SELECT_WHERE_SQL.format(name=cls._get_name(), fields=fields, conditions=conditions), fields, id
+
+    @classmethod
+    def _get_select_where_sql(cls, **kwargs):
+        fields = ['id']
+        for name, field in inspect.getmembers(cls):
+            if isinstance(field, Column):
+                fields.append(name)
+            if isinstance(field, ForeignKey):
+                fields.append(f'{name}_id')
+        conditions = ' AND '.join([f'{key} = ?' for key in kwargs.keys()])
+        sql = SELECT_WHERE_SQL.format(name=cls._get_name(), fields=', '.join(fields), conditions=conditions)
+        return sql, fields, list(kwargs.values()), fields, conditions
 
 
 class Column:

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b3163fa-a6c1-4af8-97c5-e2b7ed7a6b73" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/mapper_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mona/mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mona/mapper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,25 +42,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for mapper_test.MapperTest1_CreateDB.executor": "Run",
-    "Python tests.Python tests for mapper_test.MapperTest1_CreateDB.test_db_creation.executor": "Run",
-    "Python tests.Python tests for mapper_test.MapperTest2_DefineTables.test_create_tables.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore_missing_gitignore": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for mapper_test.MapperTest1_CreateDB.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for mapper_test.MapperTest1_CreateDB.test_db_creation.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for mapper_test.MapperTest2_DefineTables.test_create_tables.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for mapper_test.MapperTest2_DefineTables.test_create_tables">
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona\tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="py_mona" />
       <option name="ENV_FILES" value="" />
@@ -82,7 +89,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for mapper_test.MapperTest1_CreateDB" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.mapper_test.MapperTest1_CreateDB" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py_mona" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,11 +101,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;mapper_test.MapperTest1_CreateDB&quot;" />
+      <option name="_new_target" value="&quot;tests.mapper_test.MapperTest1_CreateDB&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for mapper_test.MapperTest1_CreateDB.test_db_creation" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.mapper_test.MapperTest1_CreateDB.test_db_creation" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py_mona" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,11 +117,11 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;mapper_test.MapperTest1_CreateDB.test_db_creation&quot;" />
+      <option name="_new_target" value="&quot;tests.mapper_test.MapperTest1_CreateDB.test_db_creation&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for mapper_test.MapperTest2_DefineTables.test_create_tables" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.mapper_test.MapperTest2_DefineTables.test_create_tables" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py_mona" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,15 +133,15 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;mapper_test.MapperTest2_DefineTables.test_create_tables&quot;" />
+      <option name="_new_target" value="&quot;tests.mapper_test.MapperTest2_DefineTables.test_create_tables&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for mapper_test.MapperTest2_DefineTables.test_create_tables" />
-        <item itemvalue="Python tests.Python tests for mapper_test.MapperTest1_CreateDB.test_db_creation" />
-        <item itemvalue="Python tests.Python tests for mapper_test.MapperTest1_CreateDB" />
+        <item itemvalue="Python tests.Python tests for tests.mapper_test.MapperTest2_DefineTables.test_create_tables" />
+        <item itemvalue="Python tests.Python tests for tests.mapper_test.MapperTest1_CreateDB.test_db_creation" />
+        <item itemvalue="Python tests.Python tests for tests.mapper_test.MapperTest1_CreateDB" />
       </list>
     </recent_temporary>
   </component>
@@ -154,7 +161,8 @@
       <option name="presentableId" value="Default" />
       <updated>1712239094111</updated>
       <workItem from="1712239104209" duration="437000" />
-      <workItem from="1712239558106" duration="5637000" />
+      <workItem from="1712239558106" duration="6317000" />
+      <workItem from="1712324128806" duration="2675000" />
     </task>
     <servers />
   </component>
