@@ -4,6 +4,7 @@ DB_PATH = '../test.db'
 
 
 class MapperTest1_CreateDB(unittest.TestCase):
+
     def test_db_creation(self):
         global Database, db
         import os
@@ -18,15 +19,21 @@ class MapperTest1_CreateDB(unittest.TestCase):
 
 class MapperTest2_DefineTables(unittest.TestCase):
     def test_create_tables(self):
-        from mona.mapper import Table, Column, ForeignKey
+        from mona.mapper import Table, Database
         global Author, Post
         class Author(Table):
             pass
         class Post(Table):
             pass
 
+        db = Database(DB_PATH)
+        db.create(Author)
+        db.create(Post)
+        print(db.tables)
         assert Author.__name__ == 'Author'
         assert Post.__name__ == 'Post'
+        assert db.tables == ['Author', 'Post']
+
 
 
 class MapperTest3_CreateColumns(unittest.TestCase):

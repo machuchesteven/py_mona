@@ -37,6 +37,7 @@ class Database:
         if path is not None:
             self.conn = sqlite3.Connection(path)
 
+
     @property
     def tables(self):
         return [row[0] for row in self._execute(SELECT_TABLES_SQL).fetchall()]
@@ -134,7 +135,7 @@ class Table:
             if isinstance(field, ForeignKey):
                 fields.append((f'{name}_id', 'INTEGER'))
         fields = [" ".join(f) for f in fields]
-        return CREATE_TABLE_SQL.format(name=cls._get_name(), fields=', '.join(fields))
+        return CREATE_TABLE_SQL.format(name=cls.__class__.__name__, fields=', '.join(fields))
 
     @classmethod
     def _get_select_all_sql(cls):
