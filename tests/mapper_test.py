@@ -18,12 +18,15 @@ class MapperTest1_CreateDB(unittest.TestCase):
 
 
 class MapperTest2_DefineTables(unittest.TestCase):
+
     def test_create_tables(self):
         from mona.mapper import Table, Database
         import os
-        global Author, Post
+        global Author, Post, db
+
         class Author(Table):
             pass
+
         class Post(Table):
             pass
         if os.path.exists(DB_PATH):
