@@ -10,9 +10,10 @@ SQLITE_TYPES = {
     bool: 'BOOLEAN',
     bytes: 'BLOB'
 }
+
 CREATE_TABLE_SQL = 'CREATE TABLE {name} ({fields});'
 
-SELECT_TABLES_SQL = "SELECT name FROM sqlite_master WHERE type='table';"
+SELECT_TABLES_SQL = "SELECT name FROM sqlite_master WHERE type='table' and name <> 'sqlite_sequence';"
 
 INSERT_SQL = 'INSERT INTO {name} ({fields}) VALUES ({placeholders});'
 
@@ -46,12 +47,15 @@ class Database:
         '''
         Execute a SQL command
         '''
-        if params:
+        if params is not None:
             return self.conn.execute(sql, params)
         return self.conn.execute(sql)
 
     def create(self, table):
-        '''Create a new instance of a table in the database'''
+        '''
+        Create a new instance of a table in the database
+        '''
+        print(table._get_create_sql())
         self._execute(table._get_create_sql())
 
     def save(self, instance):
@@ -87,7 +91,7 @@ class Database:
         pass
 
 
-class Table:
+class Table():
     def __init__(self, **kwargs):
         self._data = {
             'id': None
@@ -135,7 +139,11 @@ class Table:
             if isinstance(field, ForeignKey):
                 fields.append((f'{name}_id', 'INTEGER'))
         fields = [" ".join(f) for f in fields]
-        return CREATE_TABLE_SQL.format(name=cls.__class__.__name__, fields=', '.join(fields))
+        table_name = cls.__class__.__name__
+        print(table_name)
+        sql = CREATE_TABLE_SQL.format(name=cls._get_name(), fields=', '.join(fields))
+        print(sql)
+        return sql
 
     @classmethod
     def _get_select_all_sql(cls):
@@ -205,3 +213,7 @@ class ForeignKey:
     def __set__(self, instance, value):
         instance._data[f'{self.table_id}'] = value.id
 
+
+if __name__ == '__main__':
+    class Author(Table):
+        pass
