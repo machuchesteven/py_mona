@@ -26,12 +26,14 @@ UPDATE_SQL = 'UPDATE {name} SET {fields} WHERE id = ?;'
 
 SELECT_WHERE_SQL = 'SELECT {fields} FROM {name} WHERE {conditions};'
 
+
 class Database:
     '''
     Database class to handle all database operations. All other instances
     will be inherited from this parent class
     '''
-    def __init__(self, path:str|None=None):
+
+    def __init__(self, path: str | None = None):
         if path is not None:
             self.conn = sqlite3.Connection(path)
 
@@ -47,7 +49,6 @@ class Database:
             return self.conn.execute(sql, params)
         return self.conn.execute(sql)
 
-
     def create(self, table):
         '''Create a new instance of a table in the database'''
         self._execute(table._get_create_sql())
@@ -58,9 +59,8 @@ class Database:
         cursor = self._execute(sql, values)
         instance._data['id'] = cursor.lastrowid
 
-
     @classmethod
-    def delete(cls, obj:object, id:int):
+    def delete(cls, obj: object, id: int):
         '''Deletes a single instance of an object from a table defined'''
         pass
 
@@ -84,6 +84,8 @@ class Database:
 
     def get(self, table, **kwargs):
         pass
+
+
 class Table:
     def __init__(self, **kwargs):
         self._data = {
@@ -113,8 +115,8 @@ class Table:
                 placeholders.append('?')
 
         sql = INSERT_SQL.format(name=self.__class__._get_name(),
-                                 fields=', '.join(fields),
-                                 placeholders=', '.join(placeholders))
+                                fields=', '.join(fields),
+                                placeholders=', '.join(placeholders))
         return sql, values
 
     @classmethod
@@ -146,7 +148,7 @@ class Table:
         return SELECT_ALL_SQL.format(name=cls._get_name(), fields=fields), fields
 
     @classmethod
-    def _get_select_where_sql_by_id(cls, id:int):
+    def _get_select_where_sql_by_id(cls, id: int):
         fields = ['id']
         for name, field in inspect.getmembers(cls):
             if isinstance(field, Column):
@@ -179,8 +181,26 @@ class Column:
     def sql_type(self):
         return SQLITE_TYPES[self.dt_type]
 
+
 class ForeignKey:
     def __init__(self, table):
         self.table = table
 
+    @property
+    def sql_type(self):
+        return 'INTEGER'
+
+    @property
+    def table_name(self):
+        return self.table.__name__.lower()
+
+    @property
+    def table_id(self):
+        return f'{self.table_name}_id'
+
+    def __get__(self, instance, owner):
+        return Database().get(self.table, id=instance._data[f'{self.table_id}'])
+
+    def __set__(self, instance, value):
+        instance._data[f'{self.table_id}'] = value.id
 
