@@ -7,9 +7,7 @@
     <list default="true" id="1b3163fa-a6c1-4af8-97c5-e2b7ed7a6b73" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mona/mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mona/mapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/mapper_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/mapper_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identifier.sqlite" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +227,7 @@
       <workItem from="1712480722731" duration="883000" />
       <workItem from="1712481635173" duration="1239000" />
       <workItem from="1712482893346" duration="24000" />
-      <workItem from="1712516581847" duration="593000" />
+      <workItem from="1712516581847" duration="725000" />
     </task>
     <servers />
   </component>
