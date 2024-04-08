@@ -1,6 +1,6 @@
 import unittest
 
-DB_PATH = '../test.db'
+DB_PATH = 'test.db'
 
 
 class MapperTest1_CreateDB(unittest.TestCase):
