@@ -1,5 +1,4 @@
 import sqlite3
-import os
 import inspect
 from typing import Tuple, List, Any
 
@@ -48,6 +47,8 @@ class Database:
         Execute a SQL command
         '''
         if params is not None:
+            print(sql)
+            print(params)
             return self.conn.execute(sql, params)
         return self.conn.execute(sql)
 
@@ -62,6 +63,8 @@ class Database:
         sql, values = instance._get_insert_sql()
         cursor = self._execute(sql, values)
         instance._data['id'] = cursor.lastrowid
+        self.conn.commit()
+
 
     @classmethod
     def delete(cls, obj: object, id: int):
@@ -82,8 +85,8 @@ class Database:
         Retrieves a single instance of a defined object from a table
         '''
         sql, fields, params = table._get_select_where_sql_by_id(id=id)
-        row = self._execute(sql, params=params).fetchone()
-        data = dict(zip(fields, row))
+        row = self._execute(sql, params=params)
+        data = dict(zip(fields, row.fetchone()))
         return table(**data)
 
 
@@ -159,9 +162,8 @@ class Table:
                 fields.append(f'{name}_id')
         conditions = 'id = ?'
         fields = ', '.join(fields)
-
         sql = SELECT_WHERE_SQL.format(name=cls._get_name(), fields=fields, conditions=conditions)
-        return sql, fields, id
+        return sql, fields, [id]
 
     @classmethod
     def _get_select_where_sql(cls, **kwargs):
@@ -191,6 +193,7 @@ class Column:
 class ForeignKey:
     def __init__(self, table):
         self.table = table
+        print(self.table.__name__.lower())
 
     @property
     def sql_type(self):

@@ -18,16 +18,19 @@ db.create(Post)
 author = Author(name="John Doe", lucky_number=7)
 db.save(author)
 
-bob = db.get(Author, 47)
+bob = db.get(Author, 1)
 
 all_authors = db.all(Author)
-
+print(all_authors)
 post = Post(title="Hello, World!", published=True, author=author)
 
 db.save(post)
 
-print(db.get(Post, 55).author.name)
+print(db.get(Post, 1).author)
 
+for author in all_authors:
+    print(author.name)
+    print(author.lucky_number)
 if __name__ == '__main__':
     print('This is mona, a cross platform ORM for Python.')
 
