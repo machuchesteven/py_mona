@@ -42,3 +42,19 @@ mona-orm run
 ```
 9. Enjoy the ORM
 10. Contribute to the project
+
+## Projects Architecture
+
+## Columns Configuration and arguments
+Table columns which are treated as model fields can be configured based on the type of the field and on the desired attributes. The following are the available column types and their arguments:-
+
+## Creating Views
+
+## Dealing with Asynchronous Code
+
+## Contributing to the project
+
+## License
+
+
+## About the Author

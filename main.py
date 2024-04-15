@@ -34,4 +34,3 @@ for author in all_authors:
 if __name__ == '__main__':
     print('This is mona, a cross platform ORM for Python.')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
