@@ -41,6 +41,51 @@ def create_folders(name:str):
     os.mkdir('docs')
     return os.path.join(os.getcwd(), name)
 
+def create_env_file(name:str):
+    '''
+    This creates an env file for the project.
+    '''
+    with open(os.path.join(os.getcwd(), name, '.env'), 'w') as f:
+        f.write('DEBUG=True\n')
+        f.write('SECRET_KEY=your_secret_key_here\n')
+        f.write('DATABASE_URL=sqlite:///db.sqlite3\n')
+        f.write('ALLOWED_HOSTS="*"\n')
+        f.write('FILESERVER_URL=http://localhost:8000\n')
+        f.write('FILESERVER_DIR=files\n')
+        f.write('FILESERVER_PORT=8000\n')
+    with open(os.path.join(os.getcwd(), name, '.dev.env'), 'w') as f:
+        f.write('DEBUG=True\n')
+        f.write('SECRET_KEY=your_secret_key_here')
+        f.write('DATABASE_URL=sqlite:///db.sqlite3\n')
+        f.write('ALLOWED_HOSTS="*"\n')
+        f.write('FILESERVER_URL=http://localhost:8000\n')
+        f.write('FILESERVER_DIR=files\n')
+        f.write('FILESERVER_PORT=8000\n')
+
+
+def create_readme_file(name:str):
+    '''
+    This creates a README.md file for the project.
+    '''
+    with open(os.path.join(os.getcwd(), name, 'README.md'), 'w') as f:
+        f.write(f'# {name}\n')
+        f.write('This is a simple project created using the MONA ORM.\n')
+        f.write('## Installation\n')
+        f.write('To install the project, run the following commands:\n')
+        f.write('```bash\n')
+        f.write(f'cd {name}\n')
+        f.write('pip install -r requirements.txt\n')
+        f.write('python manage.py runserver\n')
+        f.write('```\n')
+        f.write('## Usage\n')
+        f.write('To use the project, run the following commands:\n')
+        f.write('```bash\n')
+        f.write('python manage.py runserver\n')
+        f.write('```\n')
+        f.write('## Contributing\n')
+        f.write('To contribute to the project, follow the steps below:\n')
+
+
 if __name__ == '__main__':
     print('This is mona, a cross platform ORM for Python.')
     if len(sys.argv) < 2:
@@ -54,3 +99,4 @@ if __name__ == '__main__':
         print(f'Project {project_name} created successfully.')
         sys.exit(0)
 
+c
