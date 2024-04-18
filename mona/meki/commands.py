@@ -8,8 +8,6 @@ USE_DATABASE = True
 
 # check if the command is for initialization of a new project
 
-
-
 def create_db_settings():
     '''
     This creates a settings python file whenever a module to create a
@@ -99,4 +97,17 @@ if __name__ == '__main__':
         print(f'Project {project_name} created successfully.')
         sys.exit(0)
 
-c
+    if sys.argv[1] == 'init':
+        project_name = sys.argv[2]
+        create_folders(project_name)
+        create_db_settings()
+        create_env_file(project_name)
+        create_readme_file(project_name)
+        print(f'Project {project_name} created successfully.')
+        sys.exit(0)
+    if sys.argv[1] == 'migrate':
+        print('Migrating database...')
+        sys.exit(0)
+    if sys.argv[1] == 'run':
+        print('Running server...')
+        sys.exit(0)
