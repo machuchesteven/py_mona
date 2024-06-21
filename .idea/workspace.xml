@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b3163fa-a6c1-4af8-97c5-e2b7ed7a6b73" name="Changes" comment="" />
+    <list default="true" id="1b3163fa-a6c1-4af8-97c5-e2b7ed7a6b73" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapper_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mona/mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mona/mapper.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,12 +31,12 @@
     &quot;assignee&quot;: &quot;machuchesteven&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/machuchesteven/py_mona.git",
-    "accountId": "4ea1b81b-1f7d-4a17-b00d-34228a2f8475"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/machuchesteven/py_mona.git&quot;,
+    &quot;accountId&quot;: &quot;4ea1b81b-1f7d-4a17-b00d-34228a2f8475&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -86,12 +90,12 @@
       <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona\.git\hooks" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona" />
       <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona\mona" />
+      <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona" />
       <recent name="C:\Users\julie\Desktop\Machuche\progress\pyprojs\py_mona\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mapper">
+  <component name="RunManager" selected="Python tests.Python tests for mapper_test.MapperTest6_GetInstance.test_get_instance">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="py_mona" />
       <option name="ENV_FILES" value="" />
@@ -204,8 +208,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mapper" />
         <item itemvalue="Python tests.Python tests for mapper_test.MapperTest6_GetInstance.test_get_instance" />
+        <item itemvalue="Python.mapper" />
         <item itemvalue="Python tests.Python tests for mapper_test.MapperTest5_SaveInstance.test_save_instance" />
         <item itemvalue="Python tests.Python tests for mapper_test.MapperTest4_CreateForeignKey.test_create_foreign_key" />
         <item itemvalue="Python tests.Python tests for mapper_test.MapperTest3_CreateColumns.test_create_columns" />
@@ -242,6 +246,10 @@
       <workItem from="1712561980774" duration="254000" />
       <workItem from="1712564566938" duration="7000" />
       <workItem from="1713182302632" duration="8395000" />
+      <workItem from="1713357853112" duration="1968000" />
+      <workItem from="1713429751237" duration="4061000" />
+      <workItem from="1713735594830" duration="554000" />
+      <workItem from="1714847189843" duration="164000" />
     </task>
     <servers />
   </component>
@@ -260,7 +268,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/py_mona$.coverage" NAME=" Coverage Results" MODIFIED="1713736066418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/py_mona$mapper.coverage" NAME="mapper Coverage Results" MODIFIED="1712560132198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mona" />
-    <SUITE FILE_PATH="coverage/py_mona$.coverage" NAME=" Coverage Results" MODIFIED="1712559409116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

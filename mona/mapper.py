@@ -185,6 +185,9 @@ class Column:
         self.unique = unique
         self.default = default
 
+    def __str__(self):
+        return self.dt_type.__str__()
+
     @property
     def sql_type(self):
         return SQLITE_TYPES[self.dt_type]
