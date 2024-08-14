@@ -10,27 +10,28 @@ class Post(Table):
     title = Column(str)
     published = Column(bool)
     author = ForeignKey(Author)
-
-
-db.create(Author)
-db.create(Post)
+#
+#
+# db.create(Author)
+# db.create(Post)
 
 author = Author(name="John Doe", lucky_number=7)
 db.save(author)
 
 bob = db.get(Author, 1)
-
+print('Bobs ID is: ',bob.id)
 all_authors = db.all(Author)
-print(all_authors)
+for author in all_authors:
+    print(author.name)
+
 post = Post(title="Hello, World!", published=True, author=author)
 
 db.save(post)
 
-print(db.get(Post, 1).author)
+# obj = db.get(Post, 1).author
+# print(obj.name)
+# print(obj.lucky_number)
 
-for author in all_authors:
-    print(author.name)
-    print(author.lucky_number)
 if __name__ == '__main__':
     print('This is mona, a cross platform ORM for Python.')
 

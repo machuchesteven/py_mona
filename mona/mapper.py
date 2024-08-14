@@ -28,10 +28,10 @@ SELECT_WHERE_SQL = 'SELECT {fields} FROM {name} WHERE {conditions};'
 
 
 class Database:
-    '''
+    """
     Database class to handle all database operations. All other instances
     will be inherited from this parent class
-    '''
+    """
 
     def __init__(self, path: str | None = None):
         if path is not None:
@@ -43,9 +43,9 @@ class Database:
         return [row[0] for row in self._execute(SELECT_TABLES_SQL).fetchall()]
 
     def _execute(self, sql, params=None):
-        '''
+        """
         Execute a SQL command
-        '''
+        """
         if params is not None:
             print(sql)
             print(params)
@@ -53,13 +53,13 @@ class Database:
         return self.conn.execute(sql)
 
     def create(self, table):
-        '''
+        """
         Create a new instance of a table in the database
-        '''
+        """
         self._execute(table._get_create_sql())
 
     def save(self, instance):
-        '''Save a new instance of a defined object into a table'''
+        """Save a new instance of a defined object into a table"""
         sql, values = instance._get_insert_sql()
         cursor = self._execute(sql, values)
         instance._data['id'] = cursor.lastrowid
@@ -68,12 +68,13 @@ class Database:
 
     @classmethod
     def delete(cls, obj: object, id: int):
-        '''Deletes a single instance of an object from a table defined'''
+        """Deletes a single instance of an object from a table defined"""
         pass
 
     def all(self, table):
-        '''Returns all instances of an object from a table defined'''
+        """Returns all instances of an object from a table defined"""
         sql, fields = table._get_select_all_sql()
+        print(fields)
         result = []
         for row in self._execute(sql).fetchall():
             data = dict(zip(fields, row))
@@ -81,12 +82,18 @@ class Database:
         return result
 
     def get(self, table, id: int):
-        '''
+        """
         Retrieves a single instance of a defined object from a table
-        '''
+        """
         sql, fields, params = table._get_select_where_sql_by_id(id=id)
+        print(fields)
+        print(sql)
+        print(params)
         row = self._execute(sql, params=params)
-        data = dict(zip(fields, row.fetchone()))
+        obj = row.fetchone()
+        print('Object is:', obj, 'and fields are:', fields)
+        data = dict(zip(fields, obj))
+        print(data)
         return table(**data)
 
 
@@ -149,8 +156,8 @@ class Table:
                 fields.append(name)
             if isinstance(field, ForeignKey):
                 fields.append(f'{name}_id')
-        fields = ', '.join(fields)
-        return SELECT_ALL_SQL.format(name=cls._get_name(), fields=fields), fields
+        seleted_fields = ', '.join(fields)
+        return SELECT_ALL_SQL.format(name=cls._get_name(), fields=seleted_fields), fields
 
     @classmethod
     def _get_select_where_sql_by_id(cls, id: int):
@@ -161,8 +168,8 @@ class Table:
             if isinstance(field, ForeignKey):
                 fields.append(f'{name}_id')
         conditions = 'id = ?'
-        fields = ', '.join(fields)
-        sql = SELECT_WHERE_SQL.format(name=cls._get_name(), fields=fields, conditions=conditions)
+        select_fields = ', '.join(fields)
+        sql = SELECT_WHERE_SQL.format(name=cls._get_name(), fields=select_fields, conditions=conditions)
         return sql, fields, [id]
 
     @classmethod
@@ -173,9 +180,13 @@ class Table:
                 fields.append(name)
             if isinstance(field, ForeignKey):
                 fields.append(f'{name}_id')
+        # scan all kwargs to see if are valid fields
         conditions = ' AND '.join([f'{key} = ?' for key in kwargs.keys()])
         sql = SELECT_WHERE_SQL.format(name=cls._get_name(), fields=', '.join(fields), conditions=conditions)
         return sql, fields, list(kwargs.values()), fields, conditions
+
+    def __str__(self):
+        return f'{self.__class__.__name__}({self._data})'
 
 
 class Column:
@@ -185,12 +196,28 @@ class Column:
         self.unique = unique
         self.default = default
 
+
     def __str__(self):
         return self.dt_type.__str__()
+
+    def _get_name(self):
+        return self.__name__.lower()
 
     @property
     def sql_type(self):
         return SQLITE_TYPES[self.dt_type]
+
+    @property
+    def default_value(self):
+        return self.default
+
+    @property
+    def is_null(self):
+        return self.null
+
+    @property
+    def is_unique(self):
+        return self.unique
 
 
 class ForeignKey:
@@ -215,4 +242,3 @@ class ForeignKey:
 
     def __set__(self, instance, value):
         instance._data[f'{self.table_id}'] = value.id
-

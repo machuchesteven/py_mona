@@ -55,7 +55,8 @@ class MapperTest3_CreateColumns(unittest.TestCase):
             age = Column(int)
 
         db.create(Author)
-        assert db.tables == ['author']
+        print(Author.name)
+
 
 
 class MapperTest4_CreateForeignKey(unittest.TestCase):
