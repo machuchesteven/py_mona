@@ -26,6 +26,31 @@ UPDATE_SQL = 'UPDATE {name} SET {fields} WHERE id = ?;'
 
 SELECT_WHERE_SQL = 'SELECT {fields} FROM {name} WHERE {conditions};'
 
+TABLE_INFO_SQL = 'PRAGMA table_info({name});'
+
+
+class TableInfo:
+    """
+    Class to represent table information.
+    """
+
+    def __init__(self, row):
+        print(row[1])
+        self.name = row[1]
+        self.type = row[2]
+        self.not_null = row[3]
+        self.default = row[4]
+        self.primary_key = row[5]
+
+    def __repr__(self):
+        return f'(TableInfo: Name: {self.name}, Type: {self.type}, NOTNULL: {self.not_null}, Default: {self.default}, PK: {self.primary_key})'
+
+
+    @property
+    def pk(self):
+        return self.primary_key
+    def __str__(self):
+        return f'(Columns: Name: {self.name}, Type: {self.type}, NOTNULL: {self.not_null}, Default: {self.default}, PK: {self.primary_key})'
 
 class Database:
     """
@@ -64,6 +89,32 @@ class Database:
         cursor = self._execute(sql, values)
         instance._data['id'] = cursor.lastrowid
         self.conn.commit()
+
+    def explain(self, table):
+        """
+        Get the schema of a table in the database
+        This will be compared in case of a table update and other operations like inspection
+        """
+        print(table._get_name())
+        table_info = self._execute(TABLE_INFO_SQL.format(name=table._get_name())).fetchall()
+        columns = [str(TableInfo(row)) for row in table_info]
+        print('\n\n\n Table Info: {} \n\n\n'.format(table._get_name().upper()))
+        print('\n'.join(columns))
+        return columns
+
+    def columns(self, table):
+        """
+        Get the columns of a table in the database
+        This will be compared in case of a table update and other operations like inspection
+        """
+        table_info = self._execute(TABLE_INFO_SQL.format(name=table._get_name())).fetchall()
+        columns = [TableInfo(row).name for row in table_info]
+        print('\n\n\n Columns: {} \n'.format(table._get_name().upper()))
+        print(columns)
+        return columns
+
+
+
 
 
     @classmethod

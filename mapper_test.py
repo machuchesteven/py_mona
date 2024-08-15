@@ -15,6 +15,7 @@ class MapperTest1_CreateDB(unittest.TestCase):
         db = Database(DB_PATH)
         assert isinstance(db.conn, sqlite3.Connection)
         assert db.tables == []
+        # remove the database file after the test
 
 
 class MapperTest2_DefineTables(unittest.TestCase):
